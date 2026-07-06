@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-body { font-family: 'Inter', system-ui, sans-serif; }
-.title-font { font-family: 'Space Grotesk', sans-serif; }
 
-/* Alle Tailwind-Klassen bleiben gleich – nur zusätzliche CSS-Regeln hinzufügen */
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.title-font {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.table-container {
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.temp-bar {
+    transition: width 0.3s ease;
+}
