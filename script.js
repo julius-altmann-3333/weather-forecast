@@ -1,20 +1,11 @@
+// ==================== FULL WORKING SCRIPT.JS ====================
+
 // TAILWIND INIT
 function initTailwind() {
     // Already loaded via CDN
 }
 
-// SAMPLE DATA + GENERATION (ECMWF / DWD style)
-const baseData = [
-    { date: "2026-07-06", day: "Mo", high: 28, low: 15, mean: 21.5, trend: "+2.5", rain: "15%" },
-    { date: "2026-07-07", day: "Di", high: 29, low: 15, mean: 22.0, trend: "+2.8", rain: "20%" },
-    { date: "2026-07-08", day: "Mi", high: 30, low: 16, mean: 23.0, trend: "+3.5", rain: "10%" },
-    { date: "2026-07-09", day: "Do", high: 31, low: 16, mean: 23.5, trend: "+3.8", rain: "5%" },
-    { date: "2026-07-10", day: "Fr", high: 30, low: 16, mean: 23.0, trend: "+3.5", rain: "25%" },
-    { date: "2026-07-11", day: "Sa", high: 29, low: 15, mean: 22.0, trend: "+2.8", rain: "30%" },
-    { date: "2026-07-12", day: "So", high: 28, low: 15, mean: 21.5, trend: "+2.5", rain: "35%" }
-    // ... (we fill the rest dynamically)
-];
-
+// ==================== UPDATED TEMPERATURE FUNCTION (matches your screenshot exactly) ====================
 function generateFullTable() {
     const tbody = document.getElementById("temperature-table");
     tbody.innerHTML = "";
@@ -29,22 +20,24 @@ function generateFullTable() {
             month: "numeric", day: "numeric", year: "2-digit" 
         });
 
-        // Simulated realistic temperature curve (warm July, easing in September)
-        let high = 27 + Math.sin(i * 0.12) * 4 + Math.cos(i * 0.08) * 1.5;
-        let low = 14 + Math.sin(i * 0.13) * 3;
-        high = Math.max(24, Math.min(33, Math.round(high)));
-        low = Math.max(13, Math.min(18, Math.round(low)));
+        // 🔥 NEW: Realistic 60-day curve that matches your screenshot perfectly
+        // July stays hot (~+2.8°C), August even warmer, September cools slightly
+        let high = 28 + Math.sin(i * 0.085) * 3.5 + Math.cos(i * 0.06) * 1.2;
+        let low  = 14 + Math.sin(i * 0.11) * 2.5;
+        high = Math.max(27, Math.min(34, Math.round(high)));
+        low  = Math.max(13, Math.min(17, Math.round(low)));
         const mean = Math.round((high + low) / 2 * 10) / 10;
 
-        // Trend simulation
-        let trend = "+";
-        if (i > 45) trend += "0.5";
-        else if (i > 30) trend += "1.2";
-        else trend += "2.8";
+        // Trend (constant +2.8°C as in your screenshot)
+        const trend = "+2.8°C";
 
-        // Rain %
-        const rain = Math.random() * 45 + (i < 20 ? 5 : 25);
-        const rainPct = Math.round(rain) + "%";
+        // Rain % (matches your screenshot style)
+        let rainPct = "30%";
+        if (i < 10) rainPct = "25%";
+        else if (i < 20) rainPct = "35%";
+        else if (i < 35) rainPct = "40%";
+        else if (i < 45) rainPct = "28%";
+        else rainPct = "22%";
 
         const row = document.createElement("tr");
         row.className = "border-b border-zinc-800 hover:bg-zinc-950 transition";
@@ -52,24 +45,24 @@ function generateFullTable() {
             <td class="py-6 px-8 font-medium">${formattedDate}</td>
             <td class="text-center py-6 px-4 font-medium">${dayName}</td>
             <td class="text-center py-6 px-4">
-                <div class="inline-flex items-center gap-2">
-                    <span class="font-semibold text-amber-400">${high}</span>
-                    <div class="w-20 h-2 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full overflow-hidden">
-                        <div class="h-full bg-amber-400" style="width: ${Math.round(high/40*100)}%"></div>
+                <div class="inline-flex items-center gap-3">
+                    <span class="font-semibold text-amber-400 text-lg">${high}</span>
+                    <div class="flex-1 h-2.5 bg-zinc-800 rounded-3xl overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-amber-400 via-orange-400 to-red-400" 
+                             style="width: ${Math.round(high / 34 * 100)}%"></div>
                     </div>
                 </div>
             </td>
             <td class="text-center py-6 px-4 font-medium text-sky-400">${low}</td>
-            <td class="text-center py-6 px-4 font-semibold">${mean}°C</td>
-            <td class="text-center py-6 px-4">
-                <span class="text-emerald-400 font-medium">${trend}°C</span>
-            </td>
+            <td class="text-center py-6 px-4 font-semibold text-emerald-400">${mean}°C</td>
+            <td class="text-center py-6 px-4 font-medium text-emerald-400">${trend}</td>
             <td class="text-center py-6 px-4 text-zinc-400">${rainPct}</td>
         `;
         tbody.appendChild(row);
     }
 }
 
+// ==================== REST OF THE CODE (unchanged) ====================
 function loadTodayData() {
     const refreshBtn = document.getElementById("refresh-text");
     refreshBtn.innerHTML = `<i class="fas fa-spinner animate-spin"></i>`;
