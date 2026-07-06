@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temperatur Deutschland • 60 Tage</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        body { font-family: 'Inter', system_ui, sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-zinc-950 text-white min-h-screen">
     <!-- HEADER -->
     <header class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
@@ -17,7 +22,7 @@
                     <p class="text-xs text-amber-400 -mt-1">WETTER • 60 TAGE</p>
                 </div>
             </div>
-            
+           
             <div class="flex items-center gap-8 text-sm">
                 <a href="#" onclick="showAbout()" class="hover:text-amber-400 transition">Über diese Seite</a>
                 <a href="#" onclick="showCookieModal()" class="hover:text-amber-400 transition">Cookie Policy</a>
@@ -39,13 +44,11 @@
                         <h2 class="text-4xl font-semibold title-font tracking-tighter" id="title-date">60-Tage-Übersicht • Deutschland</h2>
                         <p class="text-zinc-400 mt-1" id="subtitle-date">Stand: 6. Juli 2026</p>
                     </div>
-                    <button onclick="loadTodayData()" 
-                            class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl text-sm font-medium transition">
+                    <button onclick="loadTodayData()" class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl text-sm font-medium transition">
                         <i class="fas fa-sync"></i>
                         <span id="refresh-text">AKTUALISIEREN</span>
                     </button>
                 </div>
-
                 <!-- TABLE -->
                 <div class="table-container bg-zinc-900 rounded-3xl shadow-2xl overflow-hidden border border-zinc-800">
                     <table class="w-full min-w-[720px]">
@@ -72,32 +75,27 @@
                         <i class="fas fa-periscope text-2xl text-amber-400"></i>
                         <h3 class="font-semibold">Periscope AI Affiliate</h3>
                     </div>
-                    <a href="#" onclick="window.open('https://periscope.io/affiliate', '_blank')" 
-                       class="block w-full bg-gradient-to-r from-amber-400 to-orange-500 text-black font-semibold py-4 rounded-2xl text-center hover:scale-105 transition text-sm">
+                    <a href="#" onclick="window.open('https://periscope.io/affiliate', '_blank')" class="block w-full bg-gradient-to-r from-amber-400 to-orange-500 text-black font-semibold py-4 rounded-2xl text-center hover:scale-105 transition text-sm">
                         JETZT PROBIEREN
                     </a>
                     <p class="text-xs text-zinc-500 mt-4 text-center">Beste KI für Vorhersagen • 100 % kostenloser Test</p>
                 </div>
-
                 <div class="bg-zinc-900 rounded-3xl p-6 border border-emerald-500/30">
                     <div class="flex items-center gap-3 mb-4">
                         <i class="fas fa-umbrella-beach text-2xl text-emerald-400"></i>
                         <h3 class="font-semibold">Wetter.com Affiliate</h3>
                     </div>
-                    <a href="#" onclick="window.open('https://wetter.com/affiliate', '_blank')" 
-                       class="block w-full bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-semibold py-4 rounded-2xl text-center hover:scale-105 transition text-sm">
+                    <a href="#" onclick="window.open('https://wetter.com/affiliate', '_blank')" class="block w-full bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-semibold py-4 rounded-2xl text-center hover:scale-105 transition text-sm">
                         AUF WETTER.COM ANSEHEN
                     </a>
                     <p class="text-xs text-zinc-500 mt-4 text-center">Detaillierte Karten + Radar • Affiliate-Partner</p>
                 </div>
-
                 <div class="bg-zinc-900 rounded-3xl p-6 border border-purple-500/30">
                     <div class="flex items-center gap-3 mb-4">
                         <i class="fas fa-map text-2xl text-purple-400"></i>
                         <h3 class="font-semibold">DWD Wetterdienst Affiliate</h3>
                     </div>
-                    <a href="#" onclick="window.open('https://dwd.de/affiliate', '_blank')" 
-                       class="block w-full bg-gradient-to-r from-purple-400 to-violet-500 text-black font-semibold py-4 rounded-2xl text-center hover:scale-105 transition text-sm">
+                    <a href="#" onclick="window.open('https://dwd.de/affiliate', '_blank')" class="block w-full bg-gradient-to-r from-purple-400 to-violet-500 text-black font-semibold py-4 rounded-2xl text-center hover:scale-105 transition text-sm">
                         ZUM OFFIZIELLEN WEBSITE
                     </a>
                     <p class="text-xs text-zinc-500 mt-4 text-center">Offizielle Daten vom Deutschen Wetterdienst</p>
@@ -115,32 +113,25 @@
     </footer>
 
     <!-- COOKIE MODAL -->
-    <div id="cookie-modal" onclick="if(event.target.id==='cookie-modal') hideCookieModal()" 
-         class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[999]">
-        <div onclick="event.stopImmediatePropagation()" 
-             class="bg-zinc-900 rounded-3xl max-w-md w-full mx-4 overflow-hidden">
+    <div id="cookie-modal" onclick="if(event.target.id==='cookie-modal') hideCookieModal()" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[999]">
+        <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 rounded-3xl max-w-md w-full mx-4 overflow-hidden">
             <div class="p-8">
                 <h3 class="text-xl font-semibold mb-2">Cookie-Richtlinien</h3>
                 <p class="text-sm text-zinc-400 mb-6 leading-relaxed">
-                    Diese Seite verwendet ausschließlich <strong>Essenzielle Cookies</strong> für die Funktionalität (z. B. Tailwind, lokale Tabellen-Daten). 
-                    Keine Tracking-Cookies oder Analytics. 
-                    Sie können den Browser nach Bedarf konfigurieren. 
+                    Diese Seite verwendet ausschließlich <strong>Essenzielle Cookies</strong> für die Funktionalität (z. B. Tailwind, lokale Tabellen-Daten).
+                    Keine Tracking-Cookies oder Analytics.
+                    Sie können den Browser nach Bedarf konfigurieren.
                     <span class="text-amber-400">Durch Weiterfahren akzeptieren Sie die Nutzung.</span>
                 </p>
                 <div class="flex gap-4">
-                    <button onclick="hideCookieModal()" 
-                            class="flex-1 py-4 text-sm font-medium border border-zinc-700 rounded-2xl hover:bg-zinc-800">
-                        ABLEHNEN
-                    </button>
-                    <button onclick="acceptAllCookies()" 
-                            class="flex-1 py-4 text-sm font-medium bg-amber-400 text-black rounded-2xl">
-                        AKZEPTIEREN
-                    </button>
+                    <button onclick="hideCookieModal()" class="flex-1 py-4 text-sm font-medium border border-zinc-700 rounded-2xl hover:bg-zinc-800">ABLEHNEN</button>
+                    <button onclick="acceptAllCookies()" class="flex-1 py-4 text-sm font-medium bg-amber-400 text-black rounded-2xl">AKZEPTIEREN</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="index.js"></script>
 </body>
 </html>
